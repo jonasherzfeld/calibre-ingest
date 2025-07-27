@@ -1,5 +1,8 @@
 # Backend build stage
-FROM rust:1.75 AS backend-builder
+FROM rust:1.82-alpine AS backend-builder
+
+# Install build dependencies for Alpine
+RUN apk add --no-cache musl-dev
 
 WORKDIR /app
 COPY backend/Cargo.toml backend/Cargo.lock ./
