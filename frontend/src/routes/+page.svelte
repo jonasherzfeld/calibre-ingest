@@ -10,13 +10,13 @@
 	let allowedFileTypes: string[] = [];
 	let maxFileSizeMB = 25;
 	
-	const BACKEND_URL = browser ? (window.location.hostname === 'localhost' && window.location.port === '5173' ? 'http://localhost:3000' : '') : '';
+	const BACKEND_URL = browser ? (window.location.hostname === 'localhost' && window.location.port === '5173' ? 'http://localhost:3000' : '/api') : '';
 	
 	// Get allowed file types from backend
 	onMount(async () => {
 		if (browser) {
 			try {
-				const response = await fetch(`${BACKEND_URL}/`);
+				const response = await fetch(`${BACKEND_URL}`);
 				if (response.ok) {
 					const data = await response.json();
 					allowedFileTypes = data.allowed_file_types || [];
@@ -79,7 +79,7 @@
 			const formData = new FormData();
 			formData.append('file', selectedFile);
 			
-			const response = await fetch(`${BACKEND_URL}/upload`, {
+			const response = await fetch(`${BACKEND_URL === '/api' ? '' : BACKEND_URL}/upload`, {
 				method: 'POST',
 				body: formData
 			});

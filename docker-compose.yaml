@@ -2,7 +2,6 @@ services:
   calibre-ingest:
     container_name: calibre-ingest
     image: ghcr.io/jonasherzfeld/calibre-ingest:dev
-    build: .
     ports:
       - "8085:80"
     environment:
