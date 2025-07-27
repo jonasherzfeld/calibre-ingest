@@ -38,7 +38,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
-        file: docker/Dockerfile
+        file: Dockerfile
         platforms: linux/arm64
         push: true
         tags: ghcr.io/jonasherzfeld/calibre-ingest:dev
