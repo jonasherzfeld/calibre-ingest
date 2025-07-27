@@ -28,7 +28,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Install required packages
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates shadow su-exec
 
 # Copy nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -42,11 +42,9 @@ COPY --from=backend-builder /app/target/release/calibre-ingest-backend /usr/loca
 # Create upload directory
 RUN mkdir -p /uploads
 
-# Create startup script
-RUN echo '#!/bin/sh' > /start.sh && \
-    echo '/usr/local/bin/calibre-ingest-backend &' >> /start.sh && \
-    echo 'nginx -g "daemon off;"' >> /start.sh && \
-    chmod +x /start.sh
+# Copy and set up startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 EXPOSE 80
 
