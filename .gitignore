@@ -1,0 +1,19 @@
+# Dependencies
+target/
+node_modules/
+.svelte-kit/
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.DS_Store
+
+# Uploads
+uploads/
+
+# Logs
+*.log

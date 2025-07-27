@@ -1,0 +1,13 @@
+services:
+  calibre-ingest:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - ALLOWED_FILE_TYPES=epub,pdf,mobi,azw,azw3,txt,fb2,cbr,cbz
+    volumes:
+      - ./uploads:/uploads
+    restart: unless-stopped
+
+volumes:
+  uploads:
